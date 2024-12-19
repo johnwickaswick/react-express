@@ -24,4 +24,4 @@ const options = {
 };
 
 http.createServer(app).listen(process.env.VITE_PORT_HTTP, e => console.log(e ? e : "HTTP server"));
-https.createServer(app).listen(process.env.VITE_PORT_HTTPS, e => console.log(e ? e : "HTTPS server"));
+https.createServer(options,app).listen(process.env.VITE_PORT_HTTPS, e => console.log(e ? e : "HTTPS server"));
