@@ -6,6 +6,8 @@ import http from "http";
 import https from "https";
 import fs from "fs";
 
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
 dotenv.config();
 const app = express();
 app.use(cors());
