@@ -2,6 +2,9 @@ import express from "express";
 import dotenv from "dotenv";
 import path from "path";
 import cors from "cors";
+import http from "http";
+import https from "https";
+import fs from "fs";
 
 dotenv.config();
 const app = express();
@@ -13,7 +16,10 @@ app.get("/data", (req, res) => res.json({ msg: "Success" }));
 
 app.all("/*", (req, res) => res.sendFile(path.resolve("./dist/index.html")));
 
-app.listen(process.env.VITE_PORT, error => {
-    if(error) return console.log(error);
-    console.log(`Server started on port ${process.env.VITE_PORT}`);
-});
+const options = {
+    key: fs.readFileSync("./ssl/private.key", "utf8"),
+    cert: fs.readFileSync("./ssl/certificate.crt", "utf8")
+};
+
+http.createServer(app).listen(process.env.VITE_PORT_HTTP, e => console.log(e ? e : "HTTP server"));
+https.createServer(app).listen(process.env.VITE_PORT_HTTPS, e => console.log(e ? e : "HTTPS server"));
