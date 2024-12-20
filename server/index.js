@@ -20,8 +20,8 @@ const options = {
     cert: fs.readFileSync("./ssl/certificate.crt")
 }
 
-http.createServer(app).listen(VITE_PORT_HTTP, e => console.log(e ? e : "HTTP server running..."));
-https.createServer(options, app).listen(VITE_PORT_HTTPS, e => console.log(e ? e : "HTTPS server running..."));
+http.createServer(app).listen(process.env.VITE_PORT_HTTP, e => console.log(e ? e : "HTTP server running..."));
+https.createServer(options, app).listen(process.env.VITE_PORT_HTTPS, e => console.log(e ? e : "HTTPS server running..."));
 
 // app.listen(process.env.VITE_PORT, error => {
 //     if(error) return console.log(error);
